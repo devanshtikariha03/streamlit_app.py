@@ -4,27 +4,25 @@ from anotherbest import EnhancedRAGPipeline
 # Initialize the RAG pipeline
 pipeline = EnhancedRAGPipeline(
     db_path="structured_notifications1.db",
-    vector_path="rbi_faiss_structured2.index",
-    embedding_model_name="multi-qa-mpnet-base-dot-v1",  # Strong embedding model
-    generation_model_name="google/flan-t5-large",       # High-quality generation model
-    chunk_size=500,                                     # Chunk size for splitting documents
-    chunk_overlap=50,                                   # Overlap between chunks
-    device=None,                                        # Auto-detect GPU if available
+    vector_path="rbi_faiss_structured1.index",
 )
 
 def generate_response(query):
-    """Process user query using the RAG pipeline and return summary, response, and citations."""
+    """Process user query using the RAG pipeline and return context, summary, response, and citations."""
     try:
-        # Set consistent max_length for summaries
         max_length = 250
         response = pipeline.generate_response(query, max_length=max_length)
+        
+        # Extract fields from the pipeline output
+        context_text = response.get("Context", "No context available.")
         summary = response.get("Summary", "No summary available.")
         response_text = response.get("Response", "No response available.")
         citations = response.get("Citations", [])
         citations_text = "\n".join(citations) if citations else "No citations available."
 
-        # Combine summary, response, and citations into one output
+        # Combine everything into one output string
         combined_output = (
+            f"### Context\n{context_text}\n\n"
             f"### Summary\n{summary}\n\n"
             f"### Response\n{response_text}\n\n"
             f"### Citations\n{citations_text}"
@@ -33,15 +31,9 @@ def generate_response(query):
     except Exception as e:
         return f"Error: {e}"
 
-# Streamlit Interface
 def main():
     st.title("RBI Notifications Query System")
-    st.markdown(
-        """
-        This tool allows you to search through RBI notifications and retrieve summarized insights.
-        Select a predefined query or type your own custom query to get started.
-        """
-    )
+    st.markdown("Easily query RBI notifications and regulations.")
 
     # Predefined queries
     queries = [
@@ -62,18 +54,16 @@ def main():
         "Explain the significance of the Master Direction – Reserve Bank of India (Credit Derivatives) Directions, 2022.",
     ]
 
-    # Sidebar for user input
     st.sidebar.header("Query Options")
     predefined_query = st.sidebar.selectbox("Select a predefined query", options=[""] + queries)
     custom_query = st.sidebar.text_input("Or type your query", "")
 
-    # Query submission
     if st.sidebar.button("Submit"):
         query = predefined_query if predefined_query else custom_query
         if query:
             with st.spinner("Processing your query..."):
                 output = generate_response(query)
-            st.markdown(output, unsafe_allow_html=True)
+            st.markdown(output)
         else:
             st.error("Please select or enter a query.")
 
