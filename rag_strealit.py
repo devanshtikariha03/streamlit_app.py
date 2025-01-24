@@ -3,8 +3,13 @@ from anotherbest import EnhancedRAGPipeline
 
 # Initialize the RAG pipeline
 pipeline = EnhancedRAGPipeline(
-    db_path="structured_notifications.db",
-    vector_path="rbi_faiss_structured.index",
+    db_path="structured_notifications1.db",
+    vector_path="rbi_faiss_structured2.index",
+    embedding_model_name="multi-qa-mpnet-base-dot-v1",  # Strong embedding model
+    generation_model_name="google/flan-t5-large",       # High-quality generation model
+    chunk_size=500,                                     # Chunk size for splitting documents
+    chunk_overlap=50,                                   # Overlap between chunks
+    device=None,                                        # Auto-detect GPU if available
 )
 
 def generate_response(query):
@@ -31,7 +36,12 @@ def generate_response(query):
 # Streamlit Interface
 def main():
     st.title("RBI Notifications Query System")
-    st.markdown("Easily query RBI notifications and regulations.")
+    st.markdown(
+        """
+        This tool allows you to search through RBI notifications and retrieve summarized insights.
+        Select a predefined query or type your own custom query to get started.
+        """
+    )
 
     # Predefined queries
     queries = [
@@ -52,7 +62,7 @@ def main():
         "Explain the significance of the Master Direction – Reserve Bank of India (Credit Derivatives) Directions, 2022.",
     ]
 
-    # User Input
+    # Sidebar for user input
     st.sidebar.header("Query Options")
     predefined_query = st.sidebar.selectbox("Select a predefined query", options=[""] + queries)
     custom_query = st.sidebar.text_input("Or type your query", "")
@@ -63,7 +73,7 @@ def main():
         if query:
             with st.spinner("Processing your query..."):
                 output = generate_response(query)
-            st.markdown(output)
+            st.markdown(output, unsafe_allow_html=True)
         else:
             st.error("Please select or enter a query.")
 
