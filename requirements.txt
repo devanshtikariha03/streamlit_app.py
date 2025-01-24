@@ -1,12 +1,6 @@
-# Flask for API handling
-Flask
 
 # Transformers for NLP models
 transformers
-peft
-
-# Accelerate for efficient GPU/CPU handling
-accelerate>=0.26.0
 
 # Sentence Transformers for semantic search
 sentence-transformers
@@ -18,31 +12,17 @@ langchain-community
 # FAISS for vector search
 faiss-cpu
 
-# BitsAndBytes for quantization support
-bitsandbytes
-
 # Torch and related libraries for deep learning
 torch
 torchvision
 torchaudio
 
-# KeyBERT for keyword extraction
-keybert
 
 # scikit-learn for ML utilities (e.g., CountVectorizer, LDA)
 scikit-learn
 
-# BERTopic for advanced topic modeling
-bertopic
-
-# BeautifulSoup for web scraping
-beautifulsoup4
-
 # Requests for HTTP requests
 requests
-
-# PyPDF2 for PDF text extraction
-PyPDF2
 
 # numpy for array operations
 numpy
@@ -50,5 +30,4 @@ numpy
 # pandas for data manipulation
 pandas
 
-# OpenAI Python library for OpenAI API interaction
-openai==1.59.7
+
