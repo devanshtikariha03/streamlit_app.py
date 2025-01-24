@@ -1,34 +1,40 @@
-# runtime.txt says python-3.11.4
+# ----------------------------------------------------------------------------------
+# requirements.txt
+#
+# Requires Python 3.12.8
+# ----------------------------------------------------------------------------------
 
-# Transformers
-transformers
+# Transformers (NLP models)
+transformers==4.35.0
 
-# Sentence Transformers
-sentence-transformers
+# Sentence Transformers (semantic search)
+sentence-transformers==2.2.2
 
-# LangChain
-langchain
-langchain-community
+# LangChain libraries
+langchain==0.0.293
+langchain-community==0.0.1
 
-# FAISS CPU
-faiss-cpu
+# FAISS (CPU version) for vector search
+# NOTE: Might not have stable prebuilt wheels for Python 3.12 yet, so be prepared to compile from source.
+faiss-cpu==1.7.4
 
-# Torch
-torch
-torchvision
-torchaudio
+# Torch + Vision + Audio for deep learning
+# Torch 2.1.0+ includes experimental wheels for Python 3.12 (check PyPI or nightly builds).
+torch==2.1.0
+torchvision==0.16.0
+torchaudio==2.1.0
 
-# scikit-learn
-scikit-learn
+# scikit-learn for ML utilities
+scikit-learn==1.3.0
 
-# Requests
-requests
+# requests for HTTP requests
+requests==2.31.0
 
-# numpy
-numpy
+# numpy for array operations
+numpy==1.25.2
 
-# pandas
-pandas
+# pandas for data manipulation
+pandas==2.1.1
 
-# streamlit
-streamlit
+# streamlit for the web UI
+streamlit==1.26.0
