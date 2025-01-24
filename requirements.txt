@@ -1,33 +1,34 @@
+# runtime.txt says python-3.11.4
 
-# Transformers for NLP models
+# Transformers
 transformers
 
-# Sentence Transformers for semantic search
+# Sentence Transformers
 sentence-transformers
 
-# LangChain libraries
+# LangChain
 langchain
 langchain-community
 
-# FAISS for vector search
+# FAISS CPU
 faiss-cpu
 
-# Torch and related libraries for deep learning
+# Torch
 torch
 torchvision
 torchaudio
 
-
-# scikit-learn for ML utilities (e.g., CountVectorizer, LDA)
+# scikit-learn
 scikit-learn
 
-# Requests for HTTP requests
+# Requests
 requests
 
-# numpy for array operations
+# numpy
 numpy
 
-# pandas for data manipulation
+# pandas
 pandas
 
-
+# streamlit
+streamlit
